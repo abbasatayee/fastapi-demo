@@ -1,1 +1,1 @@
-from .v1 import user_router
+from .v1 import router as v1_router

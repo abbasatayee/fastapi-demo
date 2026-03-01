@@ -1,18 +1,17 @@
 import uvicorn
 from fastapi import FastAPI
-from src.routes import user_router
+from src.routes import v1_router
 from src.utils.config import env_settings as settings
 
 
 def create_app() -> FastAPI:
-    """Initialize the FastAPI app and include routes"""
-    # include user-related endpoints from router
+    """Initialize the FastAPI app and include versioned API routes"""
     app = FastAPI()
-    
-    app.include_router(user_router , prefix="/api/v1")
+    # mount all v1 routers under /api to allow free versioning
+    app.include_router(v1_router, prefix="/api")
     return app
 
-# include user-related endpoints from router
+# create the app with all configured routers
 app = create_app()
 
 if __name__ == "__main__":
